@@ -1,7 +1,7 @@
 <template>
   <v-card class="containerWords">
     <DisplayWord @answerinput="answerInput" :word_explanation="word_explanation" />
-    <div class="text-center">Amount left: {{words.length}}</div>
+    <div class="text-center">Amount left: {{words.length + 1}}</div>
     <div class="text-center">{{feedback}}</div>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -48,7 +48,7 @@ export default {
     answerInput(data) {
       console.log(data);
 
-      if (this.current_word[0] == data.answer) {
+      if (this.current_word[0].toUpperCase() == data.answer.toUpperCase()) {
         console.log("correct answer");
         this.correct_words.push(this.current_word);
         this.feedback = "correct!"

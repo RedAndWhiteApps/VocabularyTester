@@ -13,7 +13,7 @@
           </v-toolbar>
           <v-card-text>
             {{word_explanation}}
-            <v-text-field v-model="answer" label="Answer" name="Answer" prepend-icon="mdi-account" type="text"></v-text-field>
+            <v-text-field @keyup.enter="checkAnswer()" v-model="answer" label="Answer" name="Answer" prepend-icon="mdi-account" type="text"></v-text-field>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -39,6 +39,7 @@ export default {
   methods: {
       checkAnswer() {
         this.$emit('answerinput', {answer: this.answer})
+        this.answer = "";
       }
   }
 };
