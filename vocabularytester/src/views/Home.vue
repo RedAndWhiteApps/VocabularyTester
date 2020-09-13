@@ -1,24 +1,44 @@
 <template>
   <div class="home">
-    <DisplayWords :words_excel="words_excel"/>
+    <DisplayWords :words_excel="words_excel" />
+    <label class="text-reader">
+      <input type="file" @change="loadTextFromFile" />
+    </label>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import DisplayWords from '@/components/DisplayWords.vue'
-import excel from '../assets/Vocabulary.csv'
+import DisplayWords from "@/components/DisplayWords.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    DisplayWords
+    DisplayWords,
   },
   data: () => ({
     words_excel: [],
   }),
+  mounted() {},
   methods: {
-      
-  }
-}
+    loadTextFromFile(ev) {
+      const file = ev.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const result = e.target.result;
+
+        const words_excel = result.split("\n");
+        words_excel.forEach((word_excel) => {
+          const word_combination = word_excel.split(";");
+          if (word_combination.length >= 2) {
+            this.words_excel.push(word_combination);
+          }
+        });
+      };
+      reader.readAsText(file);
+      console.log("Words has been loaded from the file",{ result: this.words_excel });
+    },
+  },
+};
 </script>
