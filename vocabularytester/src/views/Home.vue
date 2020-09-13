@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <DisplayWords :words_excel="words_excel" />
+    <DisplayWords v-if="words_excel.length > 0 " :words_excel="words_excel" />
     <label class="text-reader">
       <input type="file" @change="loadTextFromFile" />
     </label>
