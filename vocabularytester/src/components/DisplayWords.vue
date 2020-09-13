@@ -1,6 +1,8 @@
 <template>
   <v-card class="containerWords">
     <DisplayWord @answerinput="answerInput" :word_explanation="word_explanation" />
+    <div class="text-center">Amount left: {{words.length}}</div>
+    <div class="text-center">{{feedback}}</div>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn v-if="!started" color="success">Start</v-btn>
@@ -26,6 +28,7 @@ export default {
     words: [],
     correct_words: [],
     mistaken_words: [],
+    feedback: ""
   }),
   mounted() {
     this.words = this.words_excel;
@@ -48,16 +51,16 @@ export default {
       if (this.current_word[0] == data.answer) {
         console.log("correct answer");
         this.correct_words.push(this.current_word);
+        this.feedback = "correct!"
       } else {
         console.log("wrong answer");
         this.mistaken_words.push(this.current_word);
         this.words.unshift(this.current_word);
+        this.feedback = "NOT CORRECT: " + this.current_word[1]  + " -> " + this.current_word[0]
       }
 
       console.log("er");
       this.current_word = this.words.pop();
-      console.log({ wrods: this.words});
-      console.log(this.current_word)
     },
   },
 };
@@ -65,7 +68,7 @@ export default {
 
 <style scoped>
 .containerWords {
-  width: 90vw;
+  width: 100%;
   margin: auto;
 }
 </style>
