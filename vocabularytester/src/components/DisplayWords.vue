@@ -31,7 +31,7 @@ export default {
     feedback: ""
   }),
   mounted() {
-    this.words = this.words_excel;
+    this.words = this.words_excel.slice();
     this.shuffleWords();
     this.current_word = this.words.pop();
   },
@@ -46,8 +46,7 @@ export default {
     },
 
     answerInput(data) {
-      console.log(data);
-
+      console.log(data, this.current_word);
       if (this.current_word[0].toUpperCase() == data.answer.toUpperCase()) {
         console.log("correct answer");
         this.correct_words.push(this.current_word);
@@ -55,11 +54,11 @@ export default {
       } else {
         console.log("wrong answer");
         this.mistaken_words.push(this.current_word);
-        this.words.unshift(this.current_word);
-        this.feedback = "NOT CORRECT: " + this.current_word[1]  + " -> " + this.current_word[0]
+        this.words.unshift(this.current_word)
+        // this.words.push(this.current_word)
+        this.feedback = "NOT CORRECT: " + this.current_word[1]  + "\n -> \n" + this.current_word[0]
       }
 
-      console.log("er");
       this.current_word = this.words.pop();
     },
   },

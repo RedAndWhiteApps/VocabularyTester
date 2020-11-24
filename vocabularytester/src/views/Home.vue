@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <DisplayWords v-if="words_excel.length >= 0 " :words_excel="words_excel" />
+    <DisplayWords v-if="words_excel.length > 0 " :words_excel="words_excel" />
     <label class="text-reader">
       <input type="file" @change="loadTextFromFile" />
     </label>
@@ -23,11 +23,11 @@ export default {
   methods: {
     loadTextFromFile(ev) {
       const file = ev.target.files[0];
-      const reader = new FileReader();
+      const reader = new FileReader('utf-8');
 
       reader.onload = (e) => {
         const result = e.target.result;
-
+        console.log({result: result})
         const words_excel = result.split("\n");
         words_excel.forEach((word_excel) => {
           const word_combination = word_excel.split(";");

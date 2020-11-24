@@ -13,7 +13,7 @@
           </v-toolbar>
           <v-card-text>
             {{word_explanation}}
-            <v-text-field @keyup.enter="checkAnswer()" v-model="answer" label="Answer" name="Answer" prepend-icon="mdi-account" type="text"></v-text-field>
+            <v-text-field @keyup.enter="checkAnswer()" v-model="answer" label="Answer" name="Answer" prepend-icon="mdi-account" type="text" autocomplete="off"></v-text-field>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import DisableAutocomplete from 'vue-disable-autocomplete';
+
 export default {
   name: "DisplayWord",
   props: {
