@@ -1,6 +1,7 @@
 <template>
   <v-card class="containerWords">
     <DisplayWord @answerinput="answerInput" :word_explanation="word_explanation" />
+    <FeedbackDialog :title="'test'" :description="'testsss'" :positiveFeedback="true"/>
     <div class="text-center">Amount left: {{words.length + 1}}</div>
     <div class="text-center">{{feedback}}</div>
     <v-card-actions>
@@ -14,10 +15,13 @@
 
 <script>
 import DisplayWord from "./DisplayWord.vue";
+import FeedbackDialog from "./FeedbackDialog.vue"
+
 export default {
   name: "DisplayWords",
   components: {
     DisplayWord,
+    FeedbackDialog
   },
   props: {
     words_excel: Array,

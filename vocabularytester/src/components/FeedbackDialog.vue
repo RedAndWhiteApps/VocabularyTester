@@ -4,18 +4,16 @@
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
-          <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Vocabulary Tester</v-toolbar-title>
+          <v-toolbar :color="positiveFeedback ? 'positive' : 'error'" dark flat >
+            <v-toolbar-title>Feedback</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
+          <v-card-title>
+            {{title}}
+          </v-card-title>
           <v-card-text>
-            {{word_explanation}}
-            <v-text-field @keyup.enter="checkAnswer()" v-model="answer" label="Answer" name="Answer" prepend-icon="mdi-send" type="text" autocomplete="off"></v-text-field>
+              {{description}}
           </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn @click="checkAnswer" color="primary">Check answer</v-btn>
-          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -28,12 +26,11 @@ import DisableAutocomplete from 'vue-disable-autocomplete';
 export default {
   name: "DisplayWord",
   props: {
-    word_explanation: String,
+    title: String,
+    description: String,
+    positiveFeedback: Boolean,
   },
   data: () => ({
-    drawer: null,
-    started: false,
-    answer: ""
   }),
   methods: {
       checkAnswer() {
