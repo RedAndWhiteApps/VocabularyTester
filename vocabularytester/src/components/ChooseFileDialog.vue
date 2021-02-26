@@ -5,7 +5,7 @@
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Feedback</v-toolbar-title>
+            <v-toolbar-title>Upload Data</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-title>
@@ -13,12 +13,12 @@
           </v-card-title>
           <v-card-text>
             {{ description }}
-            <FileInput v-model="files" />
+            <FileInput :files="files" @setFiles="setFiles"  />
           </v-card-text>
-          <!-- <v-card-actions>
+          <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="getFiles" color="primary">Check answer</v-btn>
-          </v-card-actions> -->
+            <v-btn @click="readFiles" color="primary">Start</v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -27,21 +27,45 @@
 
 <script>
 import FileInput from "./FileInput.vue";
+import XLSX from "xlsx";
 
 export default {
-  name: "ChooseFileInput",
+  name: "ChooseFileDialog",
   components: { FileInput },
   props: {
     title: String,
     description: String,
-    positiveFeedback: Boolean,
   },
   data: () => ({
     files: [],
+    data: [],
   }),
   methods: {
-    getFiles() {
-      console.log("files in getFiels: ", this.files);
+    setFiles(files){
+      this.files = files
+    },
+
+    readFiles() {
+      const reader = new FileReader();
+      reader.onload = this.readFile;
+
+      this.files.forEach((file) => {
+        reader.readAsBinaryString(file);
+      });
+    },
+
+    readFile(e) {
+      /* Parse data */
+      const bstr = e.target.result;
+      const wb = XLSX.read(bstr, { type: "binary" });
+      /* Get first worksheet */
+      const wsname = wb.SheetNames[0];
+      const ws = wb.Sheets[wsname];
+      /* Convert array of arrays */
+      const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+      /* Update state */
+      this.data = data;
+      console.log(this.data);
     },
   },
 };
