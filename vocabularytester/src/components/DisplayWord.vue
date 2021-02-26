@@ -8,10 +8,10 @@
             <v-toolbar-title>Vocabulary Tester</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
-          <v-card-text>
+          <v-card-title class="mb-0 pb-0">
             {{word_explanation}}
-            <v-text-field @keyup.enter="checkAnswer()" v-model="answer" label="Answer" name="Answer" type="text" autocomplete="off"></v-text-field>
-          </v-card-text>
+          </v-card-title>
+          <v-text-field class="mx-4" @keyup.enter="checkAnswer()" v-model="answer" label="Answer" name="Answer" type="text" autocomplete="off"></v-text-field>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn @click="checkAnswer" color="primary">Check answer</v-btn>
