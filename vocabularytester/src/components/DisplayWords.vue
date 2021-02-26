@@ -53,15 +53,20 @@ export default {
   computed: {
     word_explanation() {
       console.log("word_explanation", this.current_word, this.current_word[0]);
-      return this.current_word[1].toString();
+      try {
+        return this.current_word[1].toString();
+      } catch (e) {
+        // TODO: notify error display --> missing correct table structure
+        return "";
+      }
     },
   },
   methods: {
-    closeFeedback(){
+    closeFeedback() {
       this.showFeedback = false;
     },
-    saveAnswerToList(data){
-      console.log('saveAnswerToList', data)
+    saveAnswerToList(data) {
+      console.log("saveAnswerToList", data);
       //TODO
     },
     shuffleWords() {
@@ -88,12 +93,16 @@ export default {
         // this.words.push(this.current_word)
         this.positiveFeedback = false;
         this.feedbackDescription =
-          this.current_word[1] +
-          " = " +
-          this.current_word[0];
+          this.current_word[1] + " = " + this.current_word[0];
       }
 
-      this.current_word = this.words.pop();
+      console.log(this.words);
+      if (this.words.length > 0) {
+        this.current_word = this.words.pop();
+      } else {
+        this.$emit("WordListFinished");
+        // Congrats and go back
+      }
     },
   },
 };

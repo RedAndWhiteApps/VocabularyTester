@@ -1,6 +1,13 @@
 <template>
   <div class="home">
-    <DisplayWords v-if="wordList.length > 0" :wordList="wordList" />
+    <v-card class="congratsCard" dark color="accent" v-if="wordListFinishedText !== ''">
+      <v-card-title class="justify-center" primary-title > {{ wordListFinishedText }} </v-card-title></v-card
+    >
+    <DisplayWords
+      v-if="wordList.length > 0"
+      :wordList="wordList"
+      @WordListFinished="WordListFinished"
+    />
     <ChooseFileDialog @setWordList="setWordList" v-else />
   </div>
 </template>
@@ -18,13 +25,19 @@ export default {
   },
   data: () => ({
     wordList: [],
+    wordListFinishedText: "",
   }),
-  mounted() {
-  },
+  mounted() {},
   methods: {
-    setWordList(data){
-      this.wordList = data
-      console.log(this.wordList, data, 'setWorldList')
+    setWordList(data) {
+      this.wordList = data;
+      console.log(this.wordList, data, "setWorldList");
+    },
+
+    WordListFinished() {
+      this.wordListFinishedText =
+        "Congratz! You found all the correct answers!";
+      this.wordList = [];
     },
   },
 };
@@ -33,5 +46,10 @@ export default {
 <style scoped>
 .home {
   width: 100vw;
+}
+
+.congratsCard{
+  width: 50vw;
+  margin: auto;
 }
 </style>
