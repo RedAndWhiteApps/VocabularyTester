@@ -46,26 +46,30 @@ export default {
       this.files = files;
     },
 
-    startQuiz() {
-      this.readFiles();
+    // Must be async, because else the sequence will missmatch
+    async startQuiz() {
+      await this.readFiles();
       this.$emit("setWordList", this.data);
     },
 
-    dataToWorldList(){
-      this.data.forEach(element => {
-        
-      });
+    dataToWorldList() {
+      this.data.forEach((element) => {});
     },
 
     readFiles() {
-      const reader = new FileReader();
-      reader.onload = this.readFile;
       this.files.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = this.readFile;
         reader.readAsBinaryString(file);
+      });
+
+      // This promise is here because else the sequence will missmatch in startQuiz()
+      return new Promise((resolve, reject) => {
+        return setTimeout(() => resolve(console.log("test")), 100);
       });
     },
 
-    readFile(e) {
+    async readFile(e) {
       /* Parse data */
       const bstr = e.target.result;
       const wb = XLSX.read(bstr, { type: "binary" });
@@ -75,8 +79,8 @@ export default {
       /* Convert array of arrays */
       const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
       /* Update state */
-      this.data = data;
-      console.log(this.data);
+      this.data = this.data.concat(data);
+      console.log("readFile ChooseFileDialog", this.data);
     },
   },
 };

@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     word_explanation() {
-      console.log(this.current_word, this.current_word[0]);
+      console.log('word_explanation', this.current_word, this.current_word[0]);
       return this.current_word[1].toString();
     },
   },

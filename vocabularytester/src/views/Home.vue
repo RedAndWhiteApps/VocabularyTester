@@ -24,7 +24,7 @@ export default {
   methods: {
     setWordList(data){
       this.wordList = data
-      console.log(this.wordList, 'setWorldList')
+      console.log(this.wordList, data, 'setWorldList')
     },
   },
 };
