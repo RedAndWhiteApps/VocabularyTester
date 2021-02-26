@@ -13,11 +13,11 @@
           </v-card-title>
           <v-card-text>
             {{ description }}
-            <FileInput :files="files" @setFiles="setFiles"  />
+            <FileInput :files="files" @setFiles="setFiles" />
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="readFiles" color="primary">Start</v-btn>
+            <v-btn @click="startQuiz" color="primary">Start</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -39,16 +39,27 @@ export default {
   data: () => ({
     files: [],
     data: [],
+    wordList: [],
   }),
   methods: {
-    setFiles(files){
-      this.files = files
+    setFiles(files) {
+      this.files = files;
+    },
+
+    startQuiz() {
+      this.readFiles();
+      this.$emit("setWordList", this.data);
+    },
+
+    dataToWorldList(){
+      this.data.forEach(element => {
+        
+      });
     },
 
     readFiles() {
       const reader = new FileReader();
       reader.onload = this.readFile;
-
       this.files.forEach((file) => {
         reader.readAsBinaryString(file);
       });

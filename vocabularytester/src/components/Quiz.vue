@@ -41,16 +41,12 @@ export default {
     mistaken_words: [],
     feedback: "",
   }),
-  beforeMount() {
+  mounted() {
     this.words = this.wordList.slice();
+    console.log(this.words)
     this.shuffleWords();
     this.current_word = this.words.pop();
   },
-  computed: {
-    word_explanation() {
-      console.log(this.current_word, this.current_word[0]);
-      return this.current_word[1].toString();
-    },
   },
   methods: {
     shuffleWords() {
@@ -58,26 +54,7 @@ export default {
     },
 
     answerInput(data) {
-      const current_word_inUpperCase = this.current_word[0].toString().toUpperCase();
-      const answer_inUpperCase = data.answer.toString().toUpperCase();
-
-      if (current_word_inUpperCase == answer_inUpperCase) {
-        console.log("correct answer");
-        this.correct_words.push(this.current_word);
-        this.feedback = "correct!";
-      } else {
-        console.log("wrong answer");
-        this.mistaken_words.push(this.current_word);
-        this.words.unshift(this.current_word);
-        // this.words.push(this.current_word)
-        this.feedback =
-          "NOT CORRECT: " +
-          this.current_word[1] +
-          "\n -> \n" +
-          this.current_word[0];
-      }
-
-      this.current_word = this.words.pop();
+    
     },
   },
 };
