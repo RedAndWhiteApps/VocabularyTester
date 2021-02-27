@@ -14,8 +14,8 @@
 
 <script>
 // @ is an alias to /src
-import DisplayWords from "@/components/DisplayWords.vue";
-import ChooseFileDialog from "@/components/ChooseFileDialog.vue";
+import DisplayWords from "./Vocabulary/DisplayWords.vue";
+import ChooseFileDialog from "./Vocabulary/ChooseFileDialog.vue";
 
 export default {
   name: "Home",
