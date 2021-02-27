@@ -8,14 +8,16 @@
             <v-toolbar-title>Feedback</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
-          <v-card-title>
+          <v-card-title class="justify-center">
             <div v-if="positiveFeedback">Correct!!</div>
             <div v-else>Not correct...</div>
           </v-card-title>
-          <v-card-text>
-            {{ description }}
+          <v-card-text class="text-center" v-if="positiveFeedback"> Keep up the good work! </v-card-text>
+          <v-card-text class="feedbackGrid" v-else>
+            <div class="font-weight-medium text-right">Question: </div> <div> {{question}}</div>
+            <div class="font-weight-medium text-right">Correct Answer: </div> <div> {{correctAnswer}}</div>
+            <div class="font-weight-medium text-right">Your Answer: </div> <div> {{yourAnswer}}</div>
           </v-card-text>
-          <v-card-text> Your answer: {{ yourAnswer }} </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn @click="saveAnswerToList" dark color="positive">Save</v-btn>
@@ -34,8 +36,9 @@ export default {
   name: "FeedbackDialog",
   props: {
     title: String,
-    description: String,
+    correctAnswer: String,
     yourAnswer: String,
+    question: String,
     positiveFeedback: Boolean,
   },
   data: () => ({}),
@@ -49,3 +52,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.feedbackGrid{
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 6.5rem auto;
+  grid-template-rows: 0.3rem auto;
+
+}
+</style>

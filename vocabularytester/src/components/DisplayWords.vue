@@ -6,9 +6,11 @@
     />
     <FeedbackDialog
       v-if="showFeedback"
-      :description="feedbackDescription"
-      :positiveFeedback="positiveFeedback"
-      :yourAnswer="yourAnswer"
+      :question="feedbackParams.question"
+      :correctAnswer="feedbackParams.correctAnswer"
+      :positiveFeedback="feedbackParams.positiveFeedback"
+      :yourAnswer="feedbackParams.yourAnswer"
+
       @closeFeedback="closeFeedback"
       @saveAnswerToList="saveAnswerToList"
     />
@@ -37,13 +39,13 @@ export default {
   },
   data: () => ({
     yourAnswer: "",
-    positiveFeedback: false,
+    feedbackParams: {positiveFeedback: false,  question: '', correctAnswer: '', yourAnswer: ''},
     showFeedback: false,
+
     current_word: [],
     words: [],
     correct_words: [],
     mistaken_words: [],
-    feedbackDescription: "",
   }),
   beforeMount() {
     this.words = this.wordList.slice();
@@ -84,16 +86,22 @@ export default {
       if (current_word_inUpperCase == answer_inUpperCase) {
         console.log("correct answer");
         this.correct_words.push(this.current_word);
-        this.positiveFeedback = true;
-        this.feedbackDescription = "Keep up the good work!";
+
+        // set feedback params
+        const yourAnswer = this.yourAnswer
+        const question = this.current_word[1]
+        const correctAnswer = this.current_word[0];    
+        this.feedbackParams = {positiveFeedback: true,  question: '', correctAnswer: '', yourAnswer: yourAnswer}
       } else {
         console.log("wrong answer");
         this.mistaken_words.push(this.current_word);
         this.words.unshift(this.current_word);
-        // this.words.push(this.current_word)
-        this.positiveFeedback = false;
-        this.feedbackDescription =
-          this.current_word[1] + " = " + this.current_word[0];
+
+        // set feedback params
+        const yourAnswer = this.yourAnswer
+        const question = this.current_word[1]
+        const correctAnswer = this.current_word[0];
+        this.feedbackParams = {positiveFeedback: false,  question: question, correctAnswer: correctAnswer, yourAnswer: yourAnswer}
       }
 
       console.log(this.words);
