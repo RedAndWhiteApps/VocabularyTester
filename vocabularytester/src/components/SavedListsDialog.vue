@@ -1,9 +1,14 @@
 <template>
-  <v-dialog v-model="dialog" scrollable>
+  <v-dialog v-model="dialog" scrollable width="unset">
     <v-card>
-      <v-card-title>Your Saved Lists</v-card-title>
-      <v-btn @click="showInputDialog = !showInputDialog"
-        >Save Current List</v-btn
+      <v-card-title
+        >Your Saved Lists
+        <v-btn
+          class="mx-6 my-3"
+          color="primary"
+          @click="showInputDialog = !showInputDialog"
+          >Save Current List</v-btn
+        ></v-card-title
       >
       <InputDialog
         :showInputDialog="showInputDialog"
@@ -12,9 +17,9 @@
       />
       <v-divider></v-divider>
       <div class="overflow-y-auto">
-        <v-list-item link v-for="x in 11" :key="x">
+        <v-list-item link v-for="(item, index) in savedLists" :key="item.name + index">
           <v-list-item-content>
-            <v-list-item-title>Single-line item</v-list-item-title>
+            <v-list-item-title>{{item.name}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </div>
@@ -43,6 +48,19 @@ export default {
       showInputDialog: false,
     };
   },
+  computed: {
+    savedLists: {
+      // getter
+      get: function () {
+        console.log(this.$store.getters.savedLists)
+        return this.$store.getters.savedLists;
+      },
+      // // setter
+      // set: function (stateAnimatedBackground) {
+      //   this.$store.commit("setAnimatedBackground", stateAnimatedBackground);
+      // },
+    },
+  },
   watch: {
     showSavedListDialog() {
       this.dialog = this.showSavedListDialog;
@@ -53,7 +71,7 @@ export default {
   },
   methods: {
     inputDialogState(stateDialog) {
-      console.log('inputDialogState', stateDialog)
+      console.log("inputDialogState", stateDialog);
       this.showInputDialog = stateDialog;
     },
     saveCurrentList(name) {

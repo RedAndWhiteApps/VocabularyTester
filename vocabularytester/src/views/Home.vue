@@ -1,7 +1,14 @@
 <template>
   <div class="home">
-    <v-card class="congratsCard" dark color="accent" v-if="wordListFinishedText !== ''">
-      <v-card-title class="justify-center" primary-title > {{ wordListFinishedText }} </v-card-title></v-card
+    <v-card
+      class="congratsCard"
+      dark
+      color="accent"
+      v-if="wordListFinishedText !== ''"
+    >
+      <v-card-title class="justify-center" primary-title>
+        {{ wordListFinishedText }}
+      </v-card-title></v-card
     >
     <DisplayWords
       v-if="wordList.length > 0"
@@ -49,7 +56,7 @@ export default {
   width: 100vw;
 }
 
-.congratsCard{
+.congratsCard {
   width: 50vw;
   margin: auto;
 }

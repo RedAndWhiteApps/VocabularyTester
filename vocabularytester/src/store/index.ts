@@ -24,21 +24,23 @@ export default new Vuex.Store({
           savedLists = JSON.stringify([]);
           localStorage.setItem("savedLists", savedLists);
         }
+
+        state.savedLists = savedLists;
       } catch (error) {
         console.log("error by retrieving savedLists from localStorage", error);
       }
 
       try {
         // retrieve currentList from localStorage
-        let savedLists: any = localStorage.getItem("currentList");
-        savedLists = JSON.parse(savedLists);
-        console.log(savedLists, "currentList", localStorage);
+        let currentList: any = localStorage.getItem("currentList");
+        currentList = JSON.parse(currentList);
+        console.log(currentList, "currentList", localStorage);
 
-        if (savedLists) {
-          state.savedLists = savedLists;
+        if (currentList) {
+          state.currentList = currentList;
         } else {
-          savedLists = JSON.stringify([]);
-          localStorage.setItem("currentList", savedLists);
+          currentList = JSON.stringify([]);
+          localStorage.setItem("currentList", currentList);
         }
       } catch (error) {
         console.log("error by retrieving currentList from localStorage", error);
@@ -55,14 +57,18 @@ export default new Vuex.Store({
       localStorage.setItem("savedLists", JSON.stringify(lists));
       state.savedLists = lists;
     },
-    addCurrentListToSavedLists(state, name = '') {
-      console.log('addCurrentListToSavedLists', name)
-      if(name === ''){
-        name = 'Current List' + String(state.savedLists.length)
+    addCurrentListToSavedLists(state, name = "") {
+      console.log("addCurrentListToSavedLists", name);
+      if (name === "") {
+        const id = state.savedLists.length;
+        console.log("CurrentList Name", name, id);
+        name = "Current List " + id;
+        console.log("CurrentList Name", name, id);
       }
-
+      console.log("CurrentList Name 2: ", name);
       let lists: any = state.savedLists;
-      lists = lists.concat([{ name: name, list: state.currentList }]);
+      lists.push({ name: name, list: state.currentList });
+      console.log("lists", lists);
       localStorage.setItem("savedLists", JSON.stringify(lists));
       state.savedLists = lists;
     },
