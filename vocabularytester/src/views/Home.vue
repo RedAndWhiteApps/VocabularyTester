@@ -31,6 +31,7 @@ export default {
   methods: {
     setWordList(data) {
       this.wordList = data;
+      this.$store.commit("setCurrentList", data);
       console.log(this.wordList, data, "setWorldList");
     },
 

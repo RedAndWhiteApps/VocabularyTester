@@ -57,12 +57,14 @@ export default {
     },
 
     drawer() {
+      console.log('drawerchagnedvalue_navigation menu', this.drawer)
       this.$emit("drawerChangedValue", this.drawer);
     },
   },
 
   methods:{
     SavedListsDialogState(savedListsDialogState){
+      console.log('drawerchagnedvalue_navigation menu', this.drawer)
       this.showSavedListDialog = savedListsDialogState;
     }
 
