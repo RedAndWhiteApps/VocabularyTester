@@ -2,14 +2,14 @@
   <v-navigation-drawer v-model="drawer" app right>
     <v-list dense>
       <v-subheader> Easy Tools </v-subheader>
-      <v-list-item link>
+      <v-list-item link @click="showSavedListDialog = !showSavedListDialog ">
         <v-list-item-action>
           <v-icon>mdi-playlist-star</v-icon>
         </v-list-item-action>
-
         <v-list-item-content>
           <v-list-item-title>My Saved Lists</v-list-item-title>
         </v-list-item-content>
+        <SavedListsDialog :showSavedListDialog="showSavedListDialog" @SavedListsDialogState="SavedListsDialogState" />
       </v-list-item>
 
       <v-subheader> Quick Settings </v-subheader>
@@ -27,16 +27,17 @@
 </template>
 
 <script>
-import AnimatedBackground from "@/components/AnimatedBackground.vue";
+import SavedListsDialog from "@/components/SavedListsDialog.vue"
 
 export default {
-  name: "LayoutsDemosBaselineFlipped",
-  components: { AnimatedBackground },
+  name: "NavigationMenu",
+  components: {SavedListsDialog },
   props: {
-    showDrawer: null,
+    showDrawer: Boolean,
   },
   data: () => ({
     drawer: null,
+    showSavedListDialog: false,
   }),
   computed: {
     animatedBackground: {
@@ -59,6 +60,13 @@ export default {
       this.$emit("drawerChangedValue", this.drawer);
     },
   },
+
+  methods:{
+    SavedListsDialogState(savedListsDialogState){
+      this.showSavedListDialog = savedListsDialogState;
+    }
+
+  }
 };
 </script>
 
