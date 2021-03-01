@@ -14,11 +14,10 @@
 
       <v-subheader> Quick Settings </v-subheader>
       <v-divider></v-divider>
-      <v-list-item link>
+      <v-list-item>
         <v-list-item-action>
-          <v-icon>mdi-image</v-icon>
+          <v-checkbox v-model="animatedBackground"></v-checkbox>
         </v-list-item-action>
-
         <v-list-item-content>
           <v-list-item-title>Animated Background</v-list-item-title>
         </v-list-item-content>
@@ -39,7 +38,18 @@ export default {
   data: () => ({
     drawer: null,
   }),
-
+  computed: {
+    animatedBackground: {
+      // getter
+      get: function () {
+        return this.$store.state.settings.animatedBackground;
+      },
+      // setter
+      set: function (stateAnimatedBackground) {
+        this.$store.commit("setAnimatedBackground", stateAnimatedBackground);
+      },
+    },
+  },
   watch: {
     showDrawer() {
       this.drawer = this.showDrawer;
