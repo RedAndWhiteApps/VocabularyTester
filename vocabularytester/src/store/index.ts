@@ -59,7 +59,7 @@ export default new Vuex.Store({
     },
     addCurrentListToSavedLists(state, name = "") {
       console.log("addCurrentListToSavedLists", name);
-      if (name === "") {
+      if (name === "" || name === null) {
         const id = state.savedLists.length;
         console.log("CurrentList Name", name, id);
         name = "Current List " + id;
