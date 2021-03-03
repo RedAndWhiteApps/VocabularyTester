@@ -15,14 +15,29 @@
         @inputDialogState="inputDialogState"
         @inputData="saveCurrentList"
       />
+
       <v-divider></v-divider>
-      <div class="overflow-y-auto">
-        <v-list-item link v-for="(item, index) in savedLists" :key="item.name + index">
-          <v-list-item-content>
-            <v-list-item-title>{{item.name}}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+      <div class="SavedListLayout">
+        <div class="overflow-y-auto">
+          <v-list-item-group
+        v-model="selectedItem"
+        color="primary"
+      >
+          <v-list-item
+            link
+            v-for="(item, index) in savedLists"
+            :key="item.name + index"
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{ item.name }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+                </v-list-item-group>
+
+        </div>
+        <ViewList :list="savedLists[selectedItem].list"/>
       </div>
+
       <v-divider></v-divider>
       <v-card-actions>
         <v-btn color="blue darken-1" text @click="dialog = false">
@@ -36,29 +51,27 @@
 
 <script>
 import InputDialog from "./InputDialog.vue";
+import ViewList from "./ViewList.vue";
 
 export default {
-  components: { InputDialog },
+  components: { InputDialog, ViewList },
   props: {
     showSavedListDialog: Boolean,
   },
   data() {
     return {
-      dialog: false,
+      dialog: true,
       showInputDialog: false,
+      selectedItem: 1,
     };
   },
   computed: {
     savedLists: {
       // getter
       get: function () {
-        console.log(this.$store.getters.savedLists)
+        console.log(this.$store.getters.savedLists);
         return this.$store.getters.savedLists;
       },
-      // // setter
-      // set: function (stateAnimatedBackground) {
-      //   this.$store.commit("setAnimatedBackground", stateAnimatedBackground);
-      // },
     },
   },
   watch: {
@@ -83,6 +96,11 @@ export default {
 </script>
 
 <style scoped>
+
+.SavedListLayout{
+  display: grid;
+  grid-template-columns: 20rem auto;
+}
 </style>
 
 
