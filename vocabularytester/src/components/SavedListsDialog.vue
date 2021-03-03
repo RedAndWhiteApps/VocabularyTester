@@ -60,7 +60,7 @@ export default {
   },
   data() {
     return {
-      dialog: true,
+      dialog: false,
       showInputDialog: false,
       selectedItem: 1,
     };
