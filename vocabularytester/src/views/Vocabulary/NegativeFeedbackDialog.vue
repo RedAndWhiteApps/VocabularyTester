@@ -12,8 +12,8 @@
             <div>Not correct...</div>
           </v-card-title>
 
-          <v-card-text class="feedbackGrid">
-            <div class="font-weight-medium text-right">Question:</div>
+          <v-card-text class="feedbackGrid text-h6">
+            <div class="font-weight-medium text-right" >Question:</div>
             <div>{{ question }}</div>
             <div class="font-weight-medium text-right">Correct Answer:</div>
             <div>{{ correctAnswer }}</div>
@@ -123,8 +123,13 @@ export default {
 
 .feedbackGrid {
   display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: 6.5rem auto;
+  grid-gap: 1.5rem;
+  grid-template-columns: 9.5rem auto;
   grid-template-rows: 0.3rem auto;
+}
+
+.gridline {
+  border-right: 1px solid black;
+  height: 100%;
 }
 </style>

@@ -4,7 +4,7 @@
       @answerinput="answerInput"
       :word_explanation="word_explanation"
     />
-    <FeedbackDialog
+    <NegativeFeedbackDialog
       v-if="showFeedback && !feedbackParams.positiveFeedback"
       :question="feedbackParams.question"
       :correctAnswer="String(feedbackParams.correctAnswer)"
@@ -33,14 +33,14 @@
 
 <script>
 import DisplayWord from "./DisplayWord.vue";
-import FeedbackDialog from "./FeedbackDialog.vue";
+import NegativeFeedbackDialog from "./NegativeFeedbackDialog.vue";
 import PositiveFeedbackDialog from "./PositiveFeedbackDialog.vue";
 
 export default {
   name: "DisplayWords",
   components: {
     DisplayWord,
-    FeedbackDialog,
+    NegativeFeedbackDialog,
     PositiveFeedbackDialog
   },
   props: {
