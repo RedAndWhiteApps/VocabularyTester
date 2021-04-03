@@ -4,7 +4,7 @@
       class="congratsCard"
       dark
       color="accent"
-      v-if="wordListFinishedText !== ''"
+      v-if="wordListFinishedText !== '' && wordList.length <= 0"
     >
       <v-card-title class="justify-center" primary-title>
         {{ wordListFinishedText }}
