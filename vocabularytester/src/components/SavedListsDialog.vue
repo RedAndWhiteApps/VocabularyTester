@@ -3,10 +3,7 @@
     <v-card>
       <v-card-title
         >Your Saved Lists
-        <v-btn
-          class="mx-6 my-3"
-          color="primary"
-          @click="dialog = !dialog"
+        <v-btn class="mx-6 my-3" color="primary" @click="dialog = !dialog"
           >Save Current List</v-btn
         ></v-card-title
       >
@@ -19,23 +16,19 @@
       <v-divider></v-divider>
       <div class="SavedListLayout">
         <div class="overflow-y-auto">
-          <v-list-item-group
-        v-model="selectedItem"
-        color="primary"
-      >
-          <v-list-item
-            link
-            v-for="(item, index) in savedLists"
-            :key="item.name + index"
-          >
-            <v-list-item-content>
-              <v-list-item-title>{{ item.name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-                </v-list-item-group>
-
+          <v-list-item-group v-model="selectedItem" color="primary">
+            <v-list-item
+              link
+              v-for="(item, index) in savedLists"
+              :key="item.name + index"
+            >
+              <v-list-item-content>
+                <v-list-item-title>{{ item.name }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
         </div>
-        <ViewList :list="savedLists[selectedItem].list"/>
+        <ViewList :list="savedLists[selectedItem].list" />
       </div>
 
       <v-divider></v-divider>
@@ -45,13 +38,9 @@
         </v-btn>
         <v-btn color="blue darken-1" text @click="dialog = false"> Save </v-btn>
         <v-spacer />
-        <v-btn
-          class="mx-6 my-3"
-          color="primary"
-          @click="dialog = !dialog"
+        <v-btn class="mx-6 my-3" color="primary" @click="quizSelectedList"
           >Quiz Current List</v-btn
         >
-        
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -98,13 +87,20 @@ export default {
       this.dialog = false;
       this.$store.commit("addCurrentListToSavedLists", name);
     },
+    quizSelectedList() {
+      this.dialog = !this.dialog;
+      const selectedList = this.savedLists[this.selectedItem].list;
+
+      console.log("quizSelectedList", this.dialog);
+      console.log("selectedList", selectedList);
+      this.$store.commit("setCurrentList", selectedList);
+    },
   },
 };
 </script>
 
 <style scoped>
-
-.SavedListLayout{
+.SavedListLayout {
   display: grid;
   grid-template-columns: 20rem auto;
 }
