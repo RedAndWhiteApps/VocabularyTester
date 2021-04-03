@@ -3,12 +3,12 @@
     <v-card>
       <v-card-title
         >Your Saved Lists
-        <v-btn class="mx-6 my-3" color="primary" @click="dialog = !dialog"
+        <v-btn class="mx-6 my-3" color="primary" @click="showInputDialog = !showInputDialog"
           >Save Current List</v-btn
         ></v-card-title
       >
       <InputDialog
-        :dialog="dialog"
+        :showInputDialog="showInputDialog"
         @inputDialogState="inputDialogState"
         @inputData="saveCurrentList"
       />
@@ -58,6 +58,7 @@ export default {
   data() {
     return {
       dialog: false,
+      showInputDialog: false,
       selectedItem: 1,
     };
   },
@@ -81,7 +82,7 @@ export default {
   methods: {
     inputDialogState(stateDialog) {
       console.log("inputDialogState", stateDialog);
-      this.dialog = dialog;
+      this.dialog = stateDialog;
     },
     saveCurrentList(name) {
       this.dialog = false;

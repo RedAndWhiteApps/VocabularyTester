@@ -7,9 +7,9 @@
     <FeedbackDialog
       v-if="showFeedback"
       :question="feedbackParams.question"
-      :correctAnswer="feedbackParams.correctAnswer"
+      :correctAnswer="String(feedbackParams.correctAnswer)"
       :positiveFeedback="feedbackParams.positiveFeedback"
-      :yourAnswer="feedbackParams.yourAnswer"
+      :yourAnswer="String(feedbackParams.yourAnswer)"
 
       @closeFeedback="closeFeedback"
       @saveAnswerToList="saveAnswerToList"
