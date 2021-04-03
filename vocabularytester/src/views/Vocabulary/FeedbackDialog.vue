@@ -4,26 +4,25 @@
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
-          <v-toolbar :color="positiveFeedback ? 'positive' : 'error'" dark flat>
+          <v-toolbar color="error" dark flat>
             <v-toolbar-title>Feedback</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-title class="justify-center">
-            <div v-if="positiveFeedback">Correct!!</div>
-            <div v-else>Not correct...</div>
+            <div>Not correct...</div>
           </v-card-title>
-          <v-card-text class="text-center" v-if="positiveFeedback">
-            Keep up the good work!
-          </v-card-text>
-          <v-card-text class="feedbackGrid" v-else>
+
+          <v-card-text class="feedbackGrid">
             <div class="font-weight-medium text-right">Question:</div>
             <div>{{ question }}</div>
             <div class="font-weight-medium text-right">Correct Answer:</div>
             <div>{{ correctAnswer }}</div>
             <div class="font-weight-medium text-right">Your Answer:</div>
-            <div id="yourAnswerDiv" ref="yourAnswerDiv" class="yourAnswerDiv">
-              {{ yourAnswer }}
-            </div>
+            <div
+              id="yourAnswerDiv"
+              ref="yourAnswerDiv"
+              class="yourAnswerDiv"
+            ></div>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -47,7 +46,6 @@ export default {
     correctAnswer: String,
     yourAnswer: String,
     question: String,
-    positiveFeedback: Boolean,
   },
   data: () => ({}),
   watch: {
@@ -61,8 +59,11 @@ export default {
   methods: {
     coloredFeedback() {
       const feedback = LetterDiff(this.yourAnswer, this.correctAnswer);
+      // const paragrapgh = this.$refs.yourAnswerDiv;
+      const paragrapgh = document.getElementById("yourAnswerDiv");
 
-      var paragrapgh = this.$refs.yourAnswerDiv;
+      console.log(paragrapgh);
+
       var spans = [];
       console.log(feedback);
 

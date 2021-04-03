@@ -5,12 +5,19 @@
       :word_explanation="word_explanation"
     />
     <FeedbackDialog
-      v-if="showFeedback"
+      v-if="showFeedback && !feedbackParams.positiveFeedback"
       :question="feedbackParams.question"
       :correctAnswer="String(feedbackParams.correctAnswer)"
-      :positiveFeedback="feedbackParams.positiveFeedback"
       :yourAnswer="String(feedbackParams.yourAnswer)"
 
+      @closeFeedback="closeFeedback"
+      @saveAnswerToList="saveAnswerToList"
+    />
+    <PositiveFeedbackDialog
+      v-if="showFeedback && feedbackParams.positiveFeedback"
+      :question="feedbackParams.question"
+      :correctAnswer="String(feedbackParams.correctAnswer)"
+      :yourAnswer="String(feedbackParams.yourAnswer)"
       @closeFeedback="closeFeedback"
       @saveAnswerToList="saveAnswerToList"
     />
@@ -27,12 +34,14 @@
 <script>
 import DisplayWord from "./DisplayWord.vue";
 import FeedbackDialog from "./FeedbackDialog.vue";
+import PositiveFeedbackDialog from "./PositiveFeedbackDialog.vue";
 
 export default {
   name: "DisplayWords",
   components: {
     DisplayWord,
     FeedbackDialog,
+    PositiveFeedbackDialog
   },
   props: {
     wordList: Array,
