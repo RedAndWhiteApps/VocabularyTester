@@ -96,6 +96,12 @@ export default new Vuex.Store({
       localStorage.setItem("currentList", JSON.stringify([]));
       state.currentList = [];
     },
+
+    redoPreviousList(state) {
+      state.currentList = state.previousList;
+
+      localStorage.setItem("currentList", JSON.stringify(state.currentList));
+    },
   },
   getters: {
     savedLists(state) {
