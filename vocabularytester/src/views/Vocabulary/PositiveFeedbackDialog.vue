@@ -11,7 +11,7 @@
           <v-card-title class="justify-center">
             <div>Correct!!</div>
           </v-card-title>
-          <v-card-text class="text-center">
+          <v-card-text class="text-center text-h6">
             Keep up the good work!
           </v-card-text>
           <v-card-actions>
