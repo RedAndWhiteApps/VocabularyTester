@@ -31,7 +31,7 @@
 
 <script>
 import DisableAutocomplete from "vue-disable-autocomplete";
-import WordsDiff from "@/plugins/wordcomparator.js"
+import LetterDiff from "@/plugins/wordcomparator.js"
 
 export default {
   name: "FeedbackDialog",
@@ -44,7 +44,7 @@ export default {
   },
   data: () => ({}),
   mounted(){
-    console.log(WordsDiff('hallo, Mijn naam is Maria  Hendrikx', 'Hey, Mijn naam is Maria Hendrickx'));
+    console.log(LetterDiff('oke', '0k'));
   },
   methods: {
     saveAnswerToList() {

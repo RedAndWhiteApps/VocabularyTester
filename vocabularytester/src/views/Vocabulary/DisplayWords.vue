@@ -54,7 +54,6 @@ export default {
   },
   computed: {
     word_explanation() {
-      console.log("word_explanation", this.current_word, this.current_word[0]);
       try {
         return this.current_word[1].toString();
       } catch (e) {
@@ -84,7 +83,6 @@ export default {
       this.showFeedback = true;
 
       if (current_word_inUpperCase == answer_inUpperCase) {
-        console.log("correct answer");
         this.correct_words.push(this.current_word);
 
         // set feedback params
@@ -93,7 +91,6 @@ export default {
         const correctAnswer = this.current_word[0];    
         this.feedbackParams = {positiveFeedback: true,  question: '', correctAnswer: '', yourAnswer: yourAnswer}
       } else {
-        console.log("wrong answer");
         this.mistaken_words.push(this.current_word);
         this.words.unshift(this.current_word);
 
@@ -104,7 +101,6 @@ export default {
         this.feedbackParams = {positiveFeedback: false,  question: question, correctAnswer: correctAnswer, yourAnswer: yourAnswer}
       }
 
-      console.log(this.words);
       if (this.words.length > 0) {
         this.current_word = this.words.pop();
       } else {
