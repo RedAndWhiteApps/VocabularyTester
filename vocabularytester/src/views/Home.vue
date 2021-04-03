@@ -33,7 +33,9 @@ export default {
   data: () => ({
     wordListFinishedText: "",
   }),
-  mounted() {},
+  mounted() {
+
+  },
   methods: {
     WordListFinished() {
       this.wordListFinishedText =

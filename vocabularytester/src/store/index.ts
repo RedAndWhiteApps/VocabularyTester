@@ -17,7 +17,6 @@ export default new Vuex.Store({
         // retrieve savedLists from localStorage
         let savedLists: any = localStorage.getItem("savedLists");
         savedLists = JSON.parse(savedLists);
-        console.log(savedLists, "savedLists", localStorage);
 
         if (savedLists) {
           state.savedLists = savedLists;
@@ -35,7 +34,6 @@ export default new Vuex.Store({
         // retrieve currentList from localStorage
         let currentList: any = localStorage.getItem("currentList");
         currentList = JSON.parse(currentList);
-        console.log(currentList, "currentList", localStorage);
 
         if (currentList) {
           state.currentList = currentList;
@@ -51,7 +49,6 @@ export default new Vuex.Store({
         // retrieve previousList from localStorage
         let previousList: any = localStorage.getItem("previousList");
         previousList = JSON.parse(previousList);
-        console.log(previousList, "previousList", localStorage);
 
         if (previousList) {
           state.previousList = previousList;
@@ -75,17 +72,12 @@ export default new Vuex.Store({
       state.savedLists = lists;
     },
     addCurrentListToSavedLists(state, name = "") {
-      console.log("addCurrentListToSavedLists", name);
       if (name === "" || name === null) {
         const id = state.savedLists.length;
-        console.log("CurrentList Name", name, id);
         name = "Current List " + id;
-        console.log("CurrentList Name", name, id);
       }
-      console.log("CurrentList Name 2: ", name);
       let lists: any = state.savedLists;
       lists.push({ name: name, list: state.currentList });
-      console.log("lists", lists);
       localStorage.setItem("savedLists", JSON.stringify(lists));
       state.savedLists = lists;
     },
