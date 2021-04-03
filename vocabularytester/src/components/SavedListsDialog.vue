@@ -6,12 +6,12 @@
         <v-btn
           class="mx-6 my-3"
           color="primary"
-          @click="showInputDialog = !showInputDialog"
+          @click="dialog = !dialog"
           >Save Current List</v-btn
         ></v-card-title
       >
       <InputDialog
-        :showInputDialog="showInputDialog"
+        :dialog="dialog"
         @inputDialogState="inputDialogState"
         @inputData="saveCurrentList"
       />
@@ -44,6 +44,14 @@
           Close
         </v-btn>
         <v-btn color="blue darken-1" text @click="dialog = false"> Save </v-btn>
+        <v-spacer />
+        <v-btn
+          class="mx-6 my-3"
+          color="primary"
+          @click="dialog = !dialog"
+          >Quiz Current List</v-btn
+        >
+        
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -61,7 +69,6 @@ export default {
   data() {
     return {
       dialog: false,
-      showInputDialog: false,
       selectedItem: 1,
     };
   },
@@ -85,10 +92,10 @@ export default {
   methods: {
     inputDialogState(stateDialog) {
       console.log("inputDialogState", stateDialog);
-      this.showInputDialog = stateDialog;
+      this.dialog = dialog;
     },
     saveCurrentList(name) {
-      this.showInputDialog = false;
+      this.dialog = false;
       this.$store.commit("addCurrentListToSavedLists", name);
     },
   },

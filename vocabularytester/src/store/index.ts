@@ -8,6 +8,7 @@ export default new Vuex.Store({
     settings: { animatedBackground: true },
     savedLists: [],
     currentList: [],
+    previousList: [],
   },
   mutations: {
     initialiseStore(state) {
@@ -45,6 +46,22 @@ export default new Vuex.Store({
       } catch (error) {
         console.log("error by retrieving currentList from localStorage", error);
       }
+
+      try {
+        // retrieve previousList from localStorage
+        let previousList: any = localStorage.getItem("previousList");
+        previousList = JSON.parse(previousList);
+        console.log(previousList, "previousList", localStorage);
+
+        if (previousList) {
+          state.previousList = previousList;
+        } else {
+          previousList = JSON.stringify([]);
+          localStorage.setItem("previousList", previousList);
+        }
+      } catch (error) {
+        console.log("error by retrieving previousList from localStorage", error);
+      }
     },
 
     setAnimatedBackground(state, stateAnimatedBackground) {
@@ -80,6 +97,13 @@ export default new Vuex.Store({
       localStorage.setItem("currentList", JSON.stringify(list));
       state.currentList = list;
     },
+    currentListFinished(state) {
+      localStorage.setItem("previousList", JSON.stringify(state.currentList));
+      state.previousList = state.currentList;
+
+      localStorage.setItem("currentList", JSON.stringify([]));
+      state.currentList = [];
+    },
   },
   getters: {
     savedLists(state) {
@@ -88,6 +112,9 @@ export default new Vuex.Store({
     currentList(state) {
       return state.currentList;
     },
+    previousList(state){
+      return state.previousList;
+    }
   },
   actions: {},
   modules: {},
