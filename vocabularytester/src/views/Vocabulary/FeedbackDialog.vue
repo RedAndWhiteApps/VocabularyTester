@@ -12,11 +12,18 @@
             <div v-if="positiveFeedback">Correct!!</div>
             <div v-else>Not correct...</div>
           </v-card-title>
-          <v-card-text class="text-center" v-if="positiveFeedback"> Keep up the good work! </v-card-text>
+          <v-card-text class="text-center" v-if="positiveFeedback">
+            Keep up the good work!
+          </v-card-text>
           <v-card-text class="feedbackGrid" v-else>
-            <div class="font-weight-medium text-right">Question: </div> <div> {{question}}</div>
-            <div class="font-weight-medium text-right">Correct Answer: </div> <div> {{correctAnswer}}</div>
-            <div class="font-weight-medium text-right">Your Answer: </div> <div> {{yourAnswer}}</div>
+            <div class="font-weight-medium text-right">Question:</div>
+            <div>{{ question }}</div>
+            <div class="font-weight-medium text-right">Correct Answer:</div>
+            <div>{{ correctAnswer }}</div>
+            <div class="font-weight-medium text-right">Your Answer:</div>
+            <div id="yourAnswerDiv" ref="yourAnswerDiv" class="yourAnswerDiv">
+              {{ yourAnswer }}
+            </div>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -31,7 +38,7 @@
 
 <script>
 import DisableAutocomplete from "vue-disable-autocomplete";
-import LetterDiff from "@/plugins/wordcomparator.js"
+import LetterDiff from "@/plugins/wordcomparator.js";
 
 export default {
   name: "FeedbackDialog",
@@ -43,10 +50,56 @@ export default {
     positiveFeedback: Boolean,
   },
   data: () => ({}),
-  mounted(){
-    console.log(LetterDiff('oke', '0k'));
+  watch: {
+    yourAnswer() {
+      this.coloredFeedback();
+    },
+  },
+  mounted() {
+    this.coloredFeedback();
   },
   methods: {
+    coloredFeedback() {
+      const feedback = LetterDiff(this.yourAnswer, this.correctAnswer);
+
+      var paragrapgh = this.$refs.yourAnswerDiv;
+      var spans = [];
+      console.log(feedback);
+
+      for (let i = 0; i < feedback.length; i++) {
+        let color = "red";
+        let word_status = feedback[i];
+
+        if (word_status["same_letters"]) {
+          console.log("same");
+
+          var span =
+            "<span style='color: " +
+            "green" +
+            ";'>" +
+            word_status["same_letters"] +
+            "</span>";
+
+          spans.push(span);
+        }
+        if (word_status["different_letters"]) {
+          console.log("different");
+
+          var span =
+            "<span style='color: " +
+            "red" +
+            ";'>" +
+            word_status["different_letters"].word1 +
+            "</span>";
+
+          spans.push(span);
+        }
+      }
+
+      // setting colored spans as paragraph HTML
+      paragrapgh.innerHTML = spans.join(" ");
+    },
+
     saveAnswerToList() {
       this.$emit("saveAnswerToList", { answer: this.yourAnswer });
     },
@@ -58,11 +111,19 @@ export default {
 </script>
 
 <style scoped>
-.feedbackGrid{
+.yourAnswerDiv {
+  display: flex;
+}
+.yourAnswerDiv > span {
+  display: inline-block;
+  padding: 1em;
+  border: 2px solid #f00;
+}
+
+.feedbackGrid {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 6.5rem auto;
   grid-template-rows: 0.3rem auto;
-
 }
 </style>

@@ -9,8 +9,8 @@ function LetterDiff(string1, string2) {
   let i = 0;
   let same_letter_counter = 0;
   let diff_letter_counter = 0;
-  let same_letters = [];
-  let diff_letters = [];
+  let same_letters = "";
+  let diff_letters = "";
 
   while (i < string1.length && i < string2.length) {
     const letter1 = string1[i];
@@ -26,14 +26,13 @@ function LetterDiff(string1, string2) {
       // if the words are the same
       if (same_letter_counter == 0) {
         // make new same_words
-        same_letters = [letter1];   
+        same_letters = letter1;   
         console.log(same_letters)
      
       } else {
         // add to existing one
-        same_letters.push(letter1); // same word,so adding 1 is enough
+        same_letters += (letter1); // same word,so adding 1 is enough
         console.log(same_letters)
-
       }
 
       same_letter_counter += 1;
@@ -46,13 +45,13 @@ function LetterDiff(string1, string2) {
 
       // add what is different
       if (diff_letter_counter !== 0) {
-        diff_letters.different_letters.word1.push(letter1);
-        diff_letters.different_letters.word2.push(letter2);
+        diff_letters.different_letters.word1 +=(letter1);
+        diff_letters.different_letters.word2 += (letter2);
       } else {
         diff_letters = {
           different_letters: {
-            word1: [letter1],
-            word2: [letter2],
+            word1: letter1,
+            word2: letter2,
           },
         };
       }
@@ -74,14 +73,14 @@ function LetterDiff(string1, string2) {
   if(i < string1.length){
     diff_letters = {
         different_letters: {
-          word1: [],
-          word2: [],
+          word1: "",
+          word2: "",
         },
       };
 
     for(let j = i; j < string1.length; j++){
-        diff_letters.different_letters.word1.push(string1[j]);
-        diff_letters.different_letters.word2.push('');
+        diff_letters.different_letters.word1 +=(string1[j]);
+        diff_letters.different_letters.word2 += ('');
 
     }
     result.push(diff_letters);
