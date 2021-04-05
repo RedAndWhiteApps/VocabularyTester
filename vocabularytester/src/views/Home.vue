@@ -1,21 +1,22 @@
 <template>
   <div class="home">
-    <v-card
-      class="congratsCard"
-      dark
-      color="accent"
-      v-if="wordListFinishedText !== '' && wordList.length <= 0"
-    >
-      <v-card-title class="justify-center" primary-title>
-        {{ wordListFinishedText }}
-      </v-card-title></v-card
-    >
-    <DisplayWords
-      v-if="wordList.length > 0"
-      :wordList="wordList"
-      @WordListFinished="WordListFinished"
-    />
-    <SelectQuizList v-else />
+    <v-btn class="resetCurrentBtn" @click="resetCurrentList" color="primary">Reset Set</v-btn>
+      <v-card
+        class="congratsCard"
+        dark
+        color="accent"
+        v-if="wordListFinishedText !== '' && wordList.length <= 0"
+      >
+        <v-card-title class="justify-center" primary-title>
+          {{ wordListFinishedText }}
+        </v-card-title></v-card
+      >
+      <DisplayWords
+        v-if="wordList.length > 0"
+        :wordList="wordList"
+        @WordListFinished="WordListFinished"
+      />
+      <SelectQuizList v-else />
   </div>
 </template>
 
@@ -33,10 +34,11 @@ export default {
   data: () => ({
     wordListFinishedText: "",
   }),
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
+    resetCurrentList(){
+      this.$store.commit("resetCurrentList")
+    },
     WordListFinished() {
       this.wordListFinishedText =
         "Congratz! You found all the correct answers!";
@@ -44,19 +46,35 @@ export default {
     },
   },
   computed: {
-    wordList(){
+    wordList() {
       return this.$store.state.currentList;
     },
-    previousList(){
+    previousList() {
       return this.$store.state.previousList;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .home {
   width: 100vw;
+  /* height: calc(100vh - 10rem); */
+  /* display: grid;
+  grid-template-rows: 10rem auto; */
+}
+
+.HomeCenter{
+  margin: auto;
+    display:flex;
+align-self: center;
+
+}
+
+.resetCurrentBtn{
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
 }
 
 .congratsCard {

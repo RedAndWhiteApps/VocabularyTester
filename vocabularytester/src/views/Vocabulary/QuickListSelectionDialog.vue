@@ -41,7 +41,6 @@ export default {
   methods: {
       RedoRecentList(){
           this.$store.commit('redoPreviousList');
-          
       }
   },
 };
