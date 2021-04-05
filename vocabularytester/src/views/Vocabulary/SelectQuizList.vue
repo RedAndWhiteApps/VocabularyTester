@@ -2,7 +2,7 @@
   <div class="SelectQuizList">
     <ChooseFileDialog @setWordList="setWordList" />
     <QuickListSelectionDialog />
-    <SelectSequenceOrder />
+    <SelectSequenceOrder class="SelectSequenceOrder" />
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
 <style scoped>
 .SelectQuizList {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 2fr 1fr;
   grid-auto-rows: auto;
   grid-gap: 1rem;
   padding: 1rem;
@@ -48,18 +48,25 @@ export default {
 }
 
 .SelectQuizList > .v-card {
-  width: 40vw;
+  width: 100%;
 }
 
-@media only screen and (max-width: 900px) {
-  .SelectQuizList > .v-card {
+@media only screen and (max-width: 1300px) {
+  .SelectQuizList{
     width: 80vw;
   }
 }
 
-@media only screen and (max-width: 450px) {
-  .SelectQuizList > .v-card {
-    width: calc(100vw - 2rem);
+@media only screen and (max-width: 800px) {
+  .SelectQuizList{
+    width: 90vw;
+      grid-template-columns: auto;
+  }
+
+.SelectQuizList > .v-card {
+    width: calc(90vw);
+      grid-template-columns: auto;
   }
 }
+
 </style>
