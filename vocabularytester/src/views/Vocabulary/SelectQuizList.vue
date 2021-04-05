@@ -47,6 +47,11 @@ export default {
   margin: auto;
 }
 
+.SelectQuizList > .SelectSequenceOrder {
+  grid-column: 2;
+  grid-row: 2 / -2;
+}
+
 .SelectQuizList > .v-card {
   width: 100%;
 }
@@ -67,6 +72,11 @@ export default {
     width: calc(90vw);
       grid-template-columns: auto;
   }
+
+  .SelectQuizList > .SelectSequenceOrder {
+  grid-column: auto;
+  grid-row: auto;
+}
 }
 
 </style>

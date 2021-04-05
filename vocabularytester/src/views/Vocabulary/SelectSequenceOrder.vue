@@ -2,10 +2,10 @@
 <template>
   <v-card class="elevation-12">
     <v-toolbar color="primary" dark flat>
-      <v-toolbar-title>Sequence Options</v-toolbar-title>
+      <v-toolbar-title>Options</v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
-    <v-card-title class="mb-0 pb-0"> </v-card-title>
+    <v-card-title class="mb-0 pb-0"> Sequence Options </v-card-title>
     <div>
       <template>
         <v-container fluid>
@@ -34,14 +34,39 @@
           </v-radio-group>
         </v-container>
       </template>
+    </div>
+    <div>
+          <v-card-title class="mb-0 pb-0">Testing Method </v-card-title>
+
+      <template>
+        <v-container fluid>
+          <v-radio-group v-model="TestingMethod">
+            <v-radio value="Typing">
+              <template v-slot:label>
+                <div>
+                  Typing<strong class="success--text"></strong>
+                </div>
+              </template>
+            </v-radio>
+            <v-radio value="MultipleChoice">
+              <template v-slot:label>
+                <div>
+                  Multiple Choice <strong class="primary--text"></strong>
+                </div>
+              </template>
+            </v-radio>
+            <v-radio value="FlashCards">
+              <template v-slot:label>
+                <div>
+                  Flash Cards <strong class="primary--text"></strong>
+                </div>
+              </template>
+            </v-radio>
+          </v-radio-group>
+        </v-container>
+      </template>
     </div></v-card
   >
-</template></div>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn @click="checkAnswer" color="primary">Check answer</v-btn>
-          </v-card-actions>
-        </v-card>
 </template>
 
 <script>
@@ -52,6 +77,7 @@ export default {
   props: {},
   data: () => ({
       SequenceOrder: 'Random',
+      TestingMethod: 'Typing'
 
   }),
   methods: {},

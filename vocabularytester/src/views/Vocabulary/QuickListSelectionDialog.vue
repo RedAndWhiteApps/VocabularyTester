@@ -2,7 +2,7 @@
 <template>
         <v-card class="elevation-12">
           <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Or ...</v-toolbar-title>
+            <v-toolbar-title>Quick Selection</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-actions class="StartSelectionGrid">
