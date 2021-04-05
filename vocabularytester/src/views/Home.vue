@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <v-btn class="resetCurrentBtn" @click="resetCurrentList" color="primary">Reset Set</v-btn>
       <v-card
         class="congratsCard"
         dark
@@ -36,9 +35,6 @@ export default {
   }),
   mounted() {},
   methods: {
-    resetCurrentList(){
-      this.$store.commit("resetCurrentList")
-    },
     WordListFinished() {
       this.wordListFinishedText =
         "Congratz! You found all the correct answers!";
