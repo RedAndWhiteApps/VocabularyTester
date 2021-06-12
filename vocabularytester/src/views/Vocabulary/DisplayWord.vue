@@ -1,9 +1,7 @@
 
 <template>
   <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
-        <v-card class="elevation-12">
+        <v-card class="elevation-12 parent_feedbackGrid">
           <v-toolbar color="primary" dark flat>
             <v-toolbar-title>Vocabulary Tester</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -31,8 +29,6 @@
             <v-btn @click="checkAnswer" color="primary">Check answer</v-btn>
           </v-card-actions>
         </v-card>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
@@ -60,3 +56,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.parent_feedbackGrid{
+  margin:auto;
+}
+
+</style>

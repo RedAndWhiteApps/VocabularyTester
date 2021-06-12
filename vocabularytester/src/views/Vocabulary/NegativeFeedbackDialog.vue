@@ -1,9 +1,7 @@
 
 <template>
   <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
-        <v-card class="elevation-12">
+        <v-card class="elevation-12 parent_feedbackGrid">
           <v-toolbar color="error" dark flat>
             <v-toolbar-title>Feedback</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -12,7 +10,7 @@
             <div>Not correct...</div>
           </v-card-title>
 
-          <v-card-text class="feedbackGrid text-h6">
+          <div class="pa-3 feedbackGrid text-h6">
             <div class="font-weight-medium text-right" >Question:</div>
             <div>{{ question }}</div>
             <div class="font-weight-medium text-right">Correct Answer:</div>
@@ -23,15 +21,14 @@
               ref="yourAnswerDiv"
               class="yourAnswerDiv"
             ></div>
-          </v-card-text>
+          </div>
+
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn @click="saveAnswerToList" dark color="positive">Save</v-btn>
             <v-btn @click="closeFeedback" dark color="error">Close</v-btn>
           </v-card-actions>
         </v-card>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
@@ -125,7 +122,12 @@ export default {
   display: grid;
   grid-gap: 1.5rem;
   grid-template-columns: 9.5rem auto;
-  grid-template-rows: 0.3rem auto;
+  /* grid-template-rows: 0.3rem auto; */
+  width: auto;
+}
+
+.parent_feedbackGrid{
+  margin:auto;
 }
 
 .gridline {
